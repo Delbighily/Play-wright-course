@@ -1,5 +1,5 @@
 const {test, expect} =require('@playwright/test');
-test.only('First Playwright test',async({page})=>
+test('First Playwright test',async({page})=>
 {
     await page.goto("https://magento.softwaretestingboard.com/");
 
@@ -14,6 +14,7 @@ test.only('First Playwright test',async({page})=>
     const successMSG=page.getByText('Thank you for registering')
     
     
+    //Interactions
     await signUpLink.click();
     await firstNameField.fill("Diaa");
     await lastNameField.fill("Elbighily");
@@ -21,5 +22,8 @@ test.only('First Playwright test',async({page})=>
     await passwordField.fill("Qwerty@123456");
     await passwordConfField.fill("Qwerty@123456");
     await submitBTN.click();
+
+
+    //Assertions
     await expect(successMSG).toBeVisible();
 });
