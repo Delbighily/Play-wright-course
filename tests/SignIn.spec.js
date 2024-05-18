@@ -17,5 +17,5 @@ await Password.fill('Qwerty@123456');
 await SignInBTN.click();
 
 //Assertions
-await expect(page.getByRole('banner')).toBeVisible();
+await expect(SuccessMSG).toBeVisible();
 });
