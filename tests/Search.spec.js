@@ -28,6 +28,4 @@ await SelectedItem.click();
 await AddWishListBTN.click();
 await expect(SuccessMSG).toBeVisible();
 
-
-//Assertions
 });
