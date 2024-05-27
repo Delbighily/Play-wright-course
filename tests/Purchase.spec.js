@@ -20,6 +20,8 @@ const AddToCartBTN=page.getByRole('button', { name: 'Add to Cart' });
 const MyCartBTN=page.getByRole('link', { name: ' My Cart' });
 const RemoveItemsBTN=page.getByRole('link', { name: ' Remove' });
 const AlertOkBTN=page.getByRole('button', { name: 'OK' });
+const SuccessPurchaseMessage=page.locator('.message-success.success.message');
+const ClearCartMSG=page.locator('.subtitle.empty');
 
 //Interactions
 await SignInPageBTN.click();
@@ -34,8 +36,11 @@ await SizeSelector.click();
 await SetQuantity.click();
 await SetQuantity.fill('4');
 await AddToCartBTN.click();
+await expect(SuccessPurchaseMessage).toBeVisible();
+await expect(SuccessPurchaseMessage).toContainText('You added Typhon Performance Fleece-lined Jacket to your shopping cart.')
 await page.waitForLoadState('networkidle')
 await MyCartBTN.click();
 await RemoveItemsBTN.click();
 await AlertOkBTN.click();
+await expect(ClearCartMSG).toHaveText('You have no items in your shopping cart.')
 });
