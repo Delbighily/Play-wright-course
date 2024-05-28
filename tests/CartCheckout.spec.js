@@ -29,6 +29,7 @@ const NextBTN=page.getByRole('button', { name: 'Next' });
 const PlaceOrderBTN=page.getByRole('button', { name: 'Place Order' });
 const RadioBTN=page.locator('.radio')
 const NewAddress=page.getByRole('button', { name: '+New Address' });
+const CheckoutSuccessMSG=page.locator('.checkout-success')
 
 
 //Interactions
@@ -52,7 +53,9 @@ await ProceedToCheckoutBTN.click();
 await page.waitForLoadState('networkidle')
 if(await NewAddress.isVisible()){
     await NextBTN.click();
-    await PlaceOrderBTN.click();}
+    await PlaceOrderBTN.click();
+    await expect(CheckoutSuccessMSG).toBeVisible();
+}
 else {
     await CountrySelector.selectOption('EG');
     await BuildingNumberField.fill('16');
@@ -63,6 +66,8 @@ else {
     await PhoneNumberField.fill('01090661988');
     await expect(RadioBTN).toBeChecked({timeout:100000});
     await NextBTN.click();
-    await PlaceOrderBTN.click();}
+    await PlaceOrderBTN.click();
+    await expect(CheckoutSuccessMSG).toBeVisible();
+}
 }
 );
