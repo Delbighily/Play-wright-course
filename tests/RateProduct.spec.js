@@ -16,7 +16,8 @@ const NickName=page.getByLabel('Nickname');
 const StarRate=page.getByTitle("4 stars");
 const SummaryField=page.getByLabel('Summary');
 const ReviewField=page.getByLabel('Review', { exact: true });
-const submitBTN=page.getByLabel('Reviews').locator('button');
+const SubmitBTN=page.getByLabel('Reviews').locator('button');
+const AlertMessage=page.getByRole('alert').locator('div').first();
 
 
 //Interactions
@@ -34,5 +35,8 @@ await NickName.clear();
 await NickName.fill("Diaa Mohamed")
 await SummaryField.fill("Good jacket over all");
 await ReviewField.fill("Great value for the money Strongly recommend it");
-await submitBTN.click();
+await SubmitBTN.click();
+await page.waitForLoadState('networkidle');
+await expect(AlertMessage).toBeVisible();
+await expect(AlertMessage).toContainText('You submitted your review for')
 })
